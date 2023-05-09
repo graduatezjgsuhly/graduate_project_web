@@ -6,16 +6,13 @@
             <el-carousel-item v-for="item in 3" :key="item">
         </el-carousel-item>
   </el-carousel> -->
-        <img src="../../assets/qingdaobaopu.jpg" style="height: 200px; width: 1200px;"/>
+        <img src="http://10.50.32.42:4000/media/qingdaobaopu.jpg" style="height: 200px; width: 1200px;"/>
     </div>
     <div style="display: flex;">
         <div>
-            清代宝谱
-            宝谱，即皇帝宝玺印谱。此《清代宝谱》由清末民初陶湘辑编。此辑包含：清乾隆十三年定本《乾隆宝谱》（内收清乾隆帝钦定御宝玺印二十五枚，后附匣衍记）、清内府藏古玉印（附汉玉十印）、金轮精舍藏古玉印。此为民国时期陶氏涉园刊朱墨套印本。
-
-从秦始皇一直到秦、汉、魏、晋，都是六玺。后来逐渐增多，到南北朝时的北齐曾经出现一个大的木印，压在公文等文书上，这方印进入御用宝玺的范围，使皇帝御用宝玺成为七方。到唐代是八方，明代的时候是二十四方。
-
-在清朝初期，御用宝玺数量较少，也没有明确的规定。随着清朝的发展和皇权的逐渐壮大，御用宝玺的数量逐渐增多。到了康熙、雍正时期，御用宝玺的数量已经达到了三十多方。清乾隆十一年，乾隆帝根据《周易》中的「天數二十有五」的记载，将御用宝玺数量钦定为二十五种，希望清王朝至少能传至二十五世。这二十五种印章被后人称为 “清二十五宝”。    
+            <h3>
+                {{ news }}
+            </h3>
         </div>
         
     </div>
@@ -26,7 +23,7 @@
     </div>
 </template>
 <script lang="ts">
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import scrollview from '../page_views/srcroll_zouma.vue'
 import headerview from '../page_views/header_view.vue'
 import axios from 'axios';
@@ -50,7 +47,32 @@ export default {
                 console.log(error);
                 });
             }
-    }
+    },
+    setup() {
+        const news = ref('');
+
+        onMounted(() => {
+        axios.post('http://10.50.32.42:4000/news/get_news/',
+            { theme: '清代宝谱' },
+            {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+            })
+            .then(response => {
+            news.value = response.data.data[0].text;
+            console.log(news.value);
+            })
+            .catch(error => {
+            console.log(error);
+            });
+        });
+
+        return {
+        news
+        };
+  }
 }
 </script>
 <style scoped>

@@ -78,7 +78,7 @@
                     </div>
                 </template>
                 <div>
-                    书格是一个自由开放的在线古籍图书馆。致力于开放式分享、介绍、推荐有价值的古籍善本，并鼓励将文化艺术作品数字化归档。ojbk
+                    书格是一个自由开放的在线古籍图书馆。致力于开放式分享、介绍、推荐有价值的古籍善本，并鼓励将文化艺术作品数字化归档。
                 </div>
                 </el-card>
             </el-space>
@@ -205,6 +205,11 @@ function qing_sourceClick(){
 </script>
 
 <style scoped>
+body{
+    background-image: url('../assets/huiwen.jpg');
+    background-size: cover;
+    background-position: center;
+}
 .image-container {
   display: grid;
   grid-template-columns: 1fr 1fr; /* 将容器分成两列 */

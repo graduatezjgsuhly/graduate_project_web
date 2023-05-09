@@ -98,6 +98,11 @@ const router = createRouter({
       name:'q=mingdai',
       component:() => import('../components/src_page/mingdai.vue')
     },
+    {
+      path: '/pdf-show',
+      name: 'pdf-view',
+      component:() => import('../components/pdf-view/pdf-show.vue')
+    },
   ]
 })
 
